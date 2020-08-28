@@ -7,13 +7,15 @@ with open(path, "r") as file:
 
 
 
-    #total_months
-    #net_total_profit_losses
-    #avg_changes_profit_losses
-    #greatest_increase_profits_(date/amount over entire period)
-    #greatest_decrease_losses_(date/amount over entire period)
+    #total_months = a count of the mumber of rows
+    #net_total_profit_losses = sum of Profit/Losses column
+    #avg_changes_profit_losses = calculate month to month changes in new column and take avg over entire period
+    #greatest_increase_profits_(date/amount over entire period) = max of new column, provide month and value
+    #greatest_decrease_losses_(date/amount over entire period) = min of new column, provide month and value
 
 with open(path, "w+") as file:
+
+    # establish name of output file?
 
     print("Financial Analysis\n")
     print("-------")
