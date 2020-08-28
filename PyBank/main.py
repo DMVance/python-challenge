@@ -15,6 +15,8 @@ with open(path, "r") as file:
 
 with open(path, "w+") as file:
 
+    # establish name of output file?
+
     print("Financial Analysis\n")
     print("-------")
     print(f"Total Months: {total_months}\n")
