@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 import os, csv
 
 path = os.path.join("Resources", "budget_data.csv")
