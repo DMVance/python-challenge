@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
+# This program 
 
-import os, csv
+import os, csv, pprint
 
 path = os.path.join("Resources", "budget_data.csv")
 output_path = os.path.join("analysis", "analysis.txt")
@@ -28,16 +29,17 @@ with open(path, "r") as file:
 with open(path, "r") as file:
     csv_reader = csv.reader(file)
 
-    #for row in csv_reader:         # better for dealing with large datasets, read one line at a time
-    #    print(row)                 # use this one for PyPoll
-
     header = next(csv_reader)       # better for small datasets or when it's more efficient to read in whole dataset to work with
     print(header)                   # can iterate over dataset later
     data = list(csv_reader)         # use this one for PyBank
-    print(data)                     
+    pprint.pprint(data)    
+    
+    #for row in csv_reader:         # better for dealing with large datasets, read one line at a time
+    #    print(row)                 # use this one for PyPoll                 
 
-# use DictReader from csv module to take each row and move into a list of dictionaries, preserving header info for each line
-
+# use DictReader from csv module to take each row and move into a list of dictionaries (rather than a list of lists), preserving header info for each line
+with open(path, "r") as file:
+    
 
 #print("File is open") if not in_file.closed else print("File is closed")
     #data = in_file.readlines()
