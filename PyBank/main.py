@@ -3,15 +3,46 @@ import os, csv
 path = os.path.join("Resources", "budget_data.csv")
 output_path = os.path.join("analysis", "analysis.txt")
 
-with open(path, "r") as in_file:
+# manually make your own csv reader
+with open(path, "r") as file:
 
-    header = in_file.readline()
+    header = file.readline()
     print("This is the header: \n")
     print(header)
-
-    data = in_file.readlines()
+    
     print("This is the data: \n")
-    print(data)
+    tot_months = 0          # Improve with a list comprehension
+    for line in file:
+        tot_months += 1
+        print(line.strip())
+
+print(f"Total number of months: {tot_months}")
+
+# another way to strip newline chars and split into list format
+with open(path, "r") as file:
+    print([row.strip().split(",") for row in file]) #strips off newline chars from each item in list
+
+# use csv module to read the file and separate header from data
+with open(path, "r") as file:
+    csv_reader = csv.reader(file)
+
+    #for row in csv_reader:         # better for dealing with large datasets, read one line at a time
+    #    print(row)                 # use this one for PyPoll
+
+    header = next(csv_reader)       # better for small datasets or when it's more efficient to read in whole dataset to work with
+    print(header)                   # can iterate over dataset later
+    data = list(csv_reader)         # use this one for PyBank
+    print(data)                     
+
+# use DictReader from csv module to take each row and move into a list of dictionaries, preserving header info for each line
+
+
+#print("File is open") if not in_file.closed else print("File is closed")
+    #data = in_file.readlines()
+    #print(data)
+
+    #print(type(header))
+    #print(type(data))
 
     # data has headers, so use csv.DictReader(file)? Or skip header?
     #csv_reader = csv.reader(in_file)
