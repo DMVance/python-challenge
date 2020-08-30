@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# This program 
+# This program creates a Python script for analyzing the financial records of your company.
 
 import os, csv, pprint
 
@@ -23,10 +23,12 @@ print(f"Total number of months: {tot_months}")
 
 # another way to strip newline chars and split into list format
 with open(path, "r") as file:
+    
     print([row.strip().split(",") for row in file]) #strips off newline chars from each item in list
 
 # use csv module to read the file and separate header from data
 with open(path, "r") as file:
+    
     csv_reader = csv.reader(file)
 
     header = next(csv_reader)       # better for small datasets or when it's more efficient to read in whole dataset to work with
@@ -40,6 +42,8 @@ with open(path, "r") as file:
 # use DictReader from csv module to take each row and move into a list of dictionaries (rather than a list of lists), preserving header info for each line
 with open(path, "r") as file:
     
+    dict_reader = csv.DictReader(file)
+    pprint.pprint([dict(ordered_dict) for ordered_dict in dict_reader])
 
 #print("File is open") if not in_file.closed else print("File is closed")
     #data = in_file.readlines()
