@@ -6,57 +6,34 @@ import os, csv, pprint
 path = os.path.join("Resources", "budget_data.csv")
 output_path = os.path.join("analysis", "analysis.txt")
 
-# manually make your own csv reader
-with open(path, "r") as file:
-
-    header = file.readline()
-    print("This is the header: \n")
-    print(header)
-    
-    print("This is the data: \n")
-    tot_months = 0          # Improve with a list comprehension
-    for line in file:
-        tot_months += 1
-        print(line.strip())
-
-print(f"Total number of months: {tot_months}")
-
-# another way to strip newline chars and split into list format
-with open(path, "r") as file:
-    
-    print([row.strip().split(",") for row in file]) #strips off newline chars from each item in list
-
-# use csv module to read the file and separate header from data
-with open(path, "r") as file:
-    
-    csv_reader = csv.reader(file)
-
-    header = next(csv_reader)       # better for small datasets or when it's more efficient to read in whole dataset to work with
-    print(header)                   # can iterate over dataset later
-    data = list(csv_reader)         # use this one for PyBank
-    pprint.pprint(data)    
-    
-    #for row in csv_reader:         # better for dealing with large datasets, read one line at a time
-    #    print(row)                 # use this one for PyPoll                 
+print("Financial Analysis")
+print("---------------------------") # is there a report formatting way to do this?
 
 # use DictReader from csv module to take each row and move into a list of dictionaries (rather than a list of lists), preserving header info for each line
 with open(path, "r") as file:
     
     dict_reader = csv.DictReader(file)
-    pprint.pprint([dict(ordered_dict) for ordered_dict in dict_reader])
+    #pprint.pprint([dict(ordered_dict) for ordered_dict in dict_reader])
+        
+    tot_months = 0           # Improve with a list comprehension?
+    for line in dict_reader: # if i had used file instead of dict_reader, it would have counted the header line
+        tot_months += 1
+    print(f"Total months: {tot_months} \n")
 
-#print("File is open") if not in_file.closed else print("File is closed")
-    #data = in_file.readlines()
-    #print(data)
+with open(path, "r") as file:
 
-    #print(type(header))
-    #print(type(data))
+    data = csv.reader(file)
 
-    # data has headers, so use csv.DictReader(file)? Or skip header?
-    #csv_reader = csv.reader(in_file)
-    #data = list(csv_reader)
-
-    # Next, iterate over contents of file, line by line, and perform appropriate operation to obtain the desired outcomes listed below
+    next(file)
+    
+    total = 0  # Improve with a list comprehension?
+    for line in data:
+        #print(line[1])
+        total += int(line[1])
+    
+print(f"Total: ${total}")
+    
+    # Iterate over contents of file, line by line, and perform appropriate operation to obtain the desired outcomes listed below
     #months = 0
     #months = [months += 1 for months in data]
 
