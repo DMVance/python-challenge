@@ -42,35 +42,58 @@ with open(path, "r") as file:
     reader = csv.DictReader(file)    # Try DictReader again...
     data = list(reader)
 #     print(data)
-   
-    avg_change = 0
-   
-    #change = []
-    
+#     my_dict = dict(data)
+#     profit_loss = my_dict["Profit/Losses"]
+#     pprint.pprint(profit_loss)
+    profit_loss = []
     for row in data:
-        #print(dict(row))
         row = dict(row)
-        row["Change"] = (row["Profits/Losses"] - )
-    
-    avg_change =    
-    
+#         print(row)
+        profit_loss.append(row["Profit/Losses"])
+#         while i < int(len(profit_loss)) - 1:
+#             change.append(int(profit_loss[i+1]) - int(profit_loss[i]))
+            
+#     pprint.pprint(profit_loss)
+#     print(change[0:2])
+#     print(type(profit_loss[1]))
+    profit = [int(e) for e in profit_loss]
+#     print(type(profit[1]))
+
+    change = []
+    i = 0
+    for e in profit[:-1]:
+#     while i <= (len(profit) - 1):    
+        c = int(profit[i+1]) - int(profit[i])
+        change.append(c)
+        i += 1
+                
+    avg_change = sum(change) / len(change)
+
     print(f"Average Change: ${avg_change}")
     
-with open(path, "r") as file:    # Try to do both max and min in "change" block
-    Date = 0
-    greatest_incr = 0
+    greatest_incr = max(change)
+    greatest_incr_date = 
+    print(f"\nGreatest Increase in Profits: {date} (${greatest_incr})")
     
-    # Use a Max() function on the newly-created Change column
+    greatest_decr_date = 
+    greatest_decr = min(change)
+    print(f"Greatest Decrease in Profits: {date} (${greatest_decr})")
     
-    print(f"\nGreatest Increase in Profits: {Date} (${greatest_incr})")
+# with open(path, "r") as file:    # Try to do both max and min in "change" block
+#     Date = 0
+#     greatest_incr = max(change)
     
-with open(path, "r") as file:
-    Date = 0
-    greatest_decr = 0
+#     # Use a Max() function on the newly-created Change column
     
-    # Use a Min() function on the newly-created Change column
+#     print(f"\nGreatest Increase in Profits: {Date} (${greatest_incr})")
     
-    print(f"Greatest Decrease in Profits: {Date} (${greatest_decr})")
+# with open(path, "r") as file:
+#     Date = 0
+#     greatest_decr = min(change)
+    
+#     # Use a Min() function on the newly-created Change column
+    
+#     print(f"Greatest Decrease in Profits: {Date} (${greatest_decr})")
                      
 # header = file.readline()  # Switch to csv.reader to clean the data and eliminate the strip/split work.
 #     data = file.readlines()
@@ -78,31 +101,34 @@ with open(path, "r") as file:
 #     change = [profit[date + 1] - profit[date] for date, profit in cleandata]
 #     print(change)
 #     data = dict(csv.DictReader(file))
+
+
+# with open(path, "r") as file:
     
-    # Iterate over contents of file, line by line, and perform appropriate operation to obtain the desired outcomes listed below
-    #months = 0
-    #months = [months += 1 for months in data]
-
-    #total_months = a count of the mumber of rows
-    #net_total_profit_losses = sum of Profit/Losses column
-    #avg_changes_profit_losses = calculate month to month changes in new column and take avg over entire period
-    #greatest_increase_profits_(date/amount over entire period) = max of new column, provide month and value
-    #greatest_decrease_losses_(date/amount over entire period) = min of new column, provide month and value
-#print(months)
-#print(data)
-
-#with open(path, "w+") as out_file:
-#
-#    # establish name of output file?
-#
-#    print("Financial Analysis\n")
-#    print("-------")
-#    print(f"Total Months: {total_months}\n")
-#    print(f"Total: ${total}\n")
-#    print(f"Average Change: ${avg_change}\n")
-#    print(f"Greatest Increase in Profits: {date} (${greatest_increase_profits})\n")
-#    print(f"Greatest Decrease in Profits: {date} (${greatest_decrease_losses})\n")
-#
-#    csv.writer(txtfile)
-#
-#    print(analysis)
+#     reader = csv.DictReader(file)    # Try DictReader again...
+#     #print(reader)
+# #     for row in reader:
+# #         print(row['Date'], row['Profit/Losses'])
+# #         print(dict(row))
+    
+# #     pprint.pprint([dict(ordered_dict) for ordered_dict in reader])
+# #     avg_change = 0 #change / tot
+# #     tot = 0 
+# #     #i = 0
+#     changed = list(reader)
+#     change = int(changed[0]['Profit/Losses'])
+# #     change_list = []
+#     next(reader)
+#     for row in reader:    # Want to ignore the first value in Profit/Losses column. Use only for calculating change to next row.
+#         change = int(row['Profit/Losses']) - change
+#         change_list.append(change)
+#         #i += 1
+#         tot += 1
+#     pprint.pprint(change_list)
+# #     change = [profit[date + 1] - profit[date] for date, profit in file]
+# #     for line in data:
+# #         tot += 1
+# #         profit = int(data[line]["Profit/Losses"]
+# #         print(profit)
+        
+# #     print(f"Average Change: ${avg_change}")
