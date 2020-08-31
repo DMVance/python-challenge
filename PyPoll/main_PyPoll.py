@@ -1,6 +1,7 @@
 import csv, os, pprint
 
 path = os.path.join("Resources", "election_data.csv")
+out_path = os.path.join("Analysis", "analysis.csv")
 
 print("Election Results")
 print("---------------------------")
