@@ -4,19 +4,16 @@
 import os, csv, pprint
 
 path = os.path.join("Resources", "budget_data.csv")
-OUT_PATH = os.path.join("analysis", "analysis.txt")
-OUT_HEADER = [
-    "Date",
-    "Profits/Losses",
-    "Change",
-    "Max",
-    "Min"
-]
+OUT_PATH = os.path.join("Analysis", "analysis.txt")
 
-print("Financial Analysis")
-print("---------------------------") # is there a report formatting way to do this?
+with open(OUT_PATH, "w+") as out_file:
+    
+    print("Financial Analysis")
+    out_file.write("Financial Analysis")
+    print("---------------------------")
+    out_file.write("---------------------------")
 
-with open(path, "r") as file:
+with open(path, "r") as file, open(OUT_PATH, "w+") as out_file:
 
     csv_reader = csv.reader(file)  # using csv.reader() gives me the data in list format already. No need to manually split/strip to clean the data.
     
@@ -24,22 +21,21 @@ with open(path, "r") as file:
 #     print(header)
     
     data = list(csv_reader) # Remember: this is for calcs in aggregate and when dataset is relatively small. For large datasets, use the iterator to go line by line.
-#     print(data)             # see 8/26 class at ~13-min mark
-    
+                            # see 8/26 class at ~13-min mark
+        
 #     next(csv_reader) #- necessary when not using data = list(csv_reader)
     
-    tot_months = 0    # Improve with a list comprehension?
+    tot_months = 0    # Improve with a list comprehension? Can't use += with list comprehension...
     total = 0         # This for loop works well because I'm doing calculations on the data in aggregate(?). For line-by-line calcs, will need a different method.
     for row in data:  # Use this with next(csv_reader) for large datasets to calc line-by-line, rather than data = list(csv_reader) with print(data). see 8/26 class at ~13-min mark
-#         print(row)
         tot_months += 1
         total += int(row[1])
-    print(f"Total months: {tot_months}")
-    print(f"Total: ${total}\n")
+    print(f"Total months: {tot_months}\nTotal: ${total}\n")
+    out_file.write(f"Total months: {tot_months}\nTotal: ${total}\n")
     
-with open(path, "r") as file:
+with open(path, "r") as file, open(OUT_PATH, "w+") as out_file:
     
-    reader = csv.DictReader(file)    # Try DictReader again...
+    reader = csv.DictReader(file)
     data = list(reader)
 #     print(data)
 #     my_dict = dict(data)
@@ -62,38 +58,52 @@ with open(path, "r") as file:
     change = []
     i = 0
     for e in profit[:-1]:
-#     while i <= (len(profit) - 1):    
         c = int(profit[i+1]) - int(profit[i])
         change.append(c)
         i += 1
-                
-    avg_change = sum(change) / len(change)
+#     print(change)
+    avg_change = round((sum(change) / len(change)), 2)
 
     print(f"Average Change: ${avg_change}")
+    out_file.write(f"Average Change: ${avg_change}")
+
+with open(path, "r") as file, open(OUT_PATH, "w+") as out_file:
     
-    greatest_incr = max(change)
-    greatest_incr_date = 
-    print(f"\nGreatest Increase in Profits: {date} (${greatest_incr})")
-    
-    greatest_decr_date = 
-    greatest_decr = min(change)
-    print(f"Greatest Decrease in Profits: {date} (${greatest_decr})")
-    
-# with open(path, "r") as file:    # Try to do both max and min in "change" block
-#     Date = 0
+    reader = csv.DictReader(file)
+    data = list(reader)
+#     print(data)
 #     greatest_incr = max(change)
+    zip_change = list(zip(data, change))
+#     print(type(zip_change))
+#     [print(e) for e in zip_change]
+    print(zip_change[20])
+    #[dict(row) for row in zip_change]
+    #print(row)
+    date_greatest_incr = 0
+    greatest_incr = 0
+    for e in zip_change:
+        if zip_change[2] == greatest_incr:
+            date_greatest_incr = data["Date"]
+#     date_greatest_incr = 0
+#     for k, v in data.items():
+#         if v == greatest_incr:
+#             date_greatest_incr = data["Date"]
+
+#     change_dict = [dict(e) for e in change]
+#     print(change_dict)    
+
+    print(f"\nGreatest Increase in Profits: {date_greatest_incr} (${greatest_incr})")
+    out_file.write(f"\nGreatest Increase in Profits: {date_greatest_incr} (${greatest_incr})")
     
-#     # Use a Max() function on the newly-created Change column
-    
-#     print(f"\nGreatest Increase in Profits: {Date} (${greatest_incr})")
-    
-# with open(path, "r") as file:
-#     Date = 0
+with open(path, "r") as file, open(OUT_PATH, "w+") as out_file:
 #     greatest_decr = min(change)
-    
-#     # Use a Min() function on the newly-created Change column
-    
-#     print(f"Greatest Decrease in Profits: {Date} (${greatest_decr})")
+    greatest_decr_date = 0
+    greatest_decr = 0
+#     for k, v in data.items():
+#         if v == greatest_decr:
+#             greatest_decr_date = data["Date"]
+    print(f"Greatest Decrease in Profits: {greatest_decr_date} (${greatest_decr})")
+    out_file.write(f"Greatest Decrease in Profits: {greatest_decr_date} (${greatest_decr})")
                      
 # header = file.readline()  # Switch to csv.reader to clean the data and eliminate the strip/split work.
 #     data = file.readlines()
