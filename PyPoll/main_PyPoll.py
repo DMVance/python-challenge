@@ -43,10 +43,10 @@ with open(path, "r") as file:
         else:
             OTooley_votes += 1
     
-    Khan_pct = Khan_votes / tot_votes
-    Correy_pct = Correy_votes / tot_votes
-    Li_pct = Li_votes / tot_votes
-    OTooley_pct = OTooley_votes / tot_votes
+    Khan_pct = (Khan_votes / tot_votes) * 100
+    Correy_pct = (Correy_votes / tot_votes) * 100
+    Li_pct = (Li_votes / tot_votes) * 100
+    OTooley_pct = (OTooley_votes / tot_votes) * 100
     
     print(f"Khan: {Khan_pct}% ({Khan_votes})")
     print(f"Correy: {Correy_pct}% ({Correy_votes})")
@@ -56,3 +56,7 @@ with open(path, "r") as file:
 print("---------------------------")   
 print("Winner: { }")
 print("---------------------------")
+
+QUESTIONS: 
+    how to format numbers to decimal places
+    best way to get max value and reference another value based on that
