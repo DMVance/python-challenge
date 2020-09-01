@@ -1,6 +1,9 @@
 import csv, os
 
 path = os.path.join("Resources", "election_data.csv")
+OUT_PATH = os.path.join("Analysis", "analysis.txt")
+
+# TEXT_FILE = "main_PyPoll.txt"
 
 print("Election Results")
 print("---------------------------")
@@ -19,10 +22,10 @@ with open(path, "r") as file:
         if e[2] not in candidates:
             candidates.append(e[2])
         tot_votes += 1
-    print(f"Total votes: {tot_votes}\n")
+    print(f"Total votes: {tot_votes}")
 #     print(candidates)
 
-print("---------------------------\n")
+print("---------------------------")
 
 with open(path, "r") as file:
     
@@ -43,20 +46,40 @@ with open(path, "r") as file:
         else:
             OTooley_votes += 1
     
-    Khan_pct = (Khan_votes / tot_votes) * 100
-    Correy_pct = (Correy_votes / tot_votes) * 100
-    Li_pct = (Li_votes / tot_votes) * 100
-    OTooley_pct = (OTooley_votes / tot_votes) * 100
+    Khan_pct = round(((Khan_votes / tot_votes) * 100), 2)
+    Correy_pct = round(((Correy_votes / tot_votes) * 100), 2)
+    Li_pct = round(((Li_votes / tot_votes) * 100), 2)
+    OTooley_pct = round(((OTooley_votes / tot_votes)) * 100, 2)
     
     print(f"Khan: {Khan_pct}% ({Khan_votes})")
     print(f"Correy: {Correy_pct}% ({Correy_votes})")
     print(f"Li: {Li_pct}% ({Li_votes})")
     print(f"O'Tooley: {OTooley_pct}% ({OTooley_votes})")
     
+    winner = max(Khan_votes, Correy_votes, Li_votes, OTooley_votes)
+    
 print("---------------------------")   
-print("Winner: { }")
+print(f"Winner: {winner}")          # change this to write name rather than vote count
 print("---------------------------")
 
-QUESTIONS: 
-    how to format numbers to decimal places
-    best way to get max value and reference another value based on that
+# EXPORT TO TEXT FILE
+with open(OUT_PATH, "w+") as file:
+    
+#     csv_writer = csv.writer(file)
+    
+    file.write("Election Results\n")
+    file.write("---------------------------\n")
+    file.write(f"Total votes: {tot_votes}\n")
+    file.write("---------------------------\n")
+    file.write(f"Khan: {Khan_pct}% ({Khan_votes})\n")
+    file.write(f"Correy: {Correy_pct}% ({Correy_votes})\n")
+    file.write(f"Li: {Li_pct}% ({Li_votes})\n")
+    file.write(f"O'Tooley: {OTooley_pct}% ({OTooley_votes})\n")
+    file.write("---------------------------\n")   
+    file.write(f"Winner: {winner}\n")          # change this to write name rather than vote count
+    file.write("---------------------------\n")
+
+
+# QUESTIONS: 
+#     how to format numbers to decimal places
+#     best way to get max value and reference another value based on that
