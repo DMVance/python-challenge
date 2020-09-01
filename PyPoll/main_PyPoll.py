@@ -53,8 +53,10 @@ with open(path, "r") as file:
     print(f"Li: {Li_pct}% ({Li_votes})")
     print(f"O'Tooley: {OTooley_pct}% ({OTooley_votes})")
     
+    winner = max(Khan_votes, Correy_votes, Li_votes, OTooley_votes)
+    
 print("---------------------------")   
-print("Winner: { }")
+print(f"Winner: {winner}")          # change this to write name rather than vote count
 print("---------------------------")
 
 # QUESTIONS: 
