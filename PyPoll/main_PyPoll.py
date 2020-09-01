@@ -69,7 +69,7 @@ with open(OUT_PATH, "w+") as file:
     
     file.write("Election Results\n")
     file.write("---------------------------\n")
-    file.write(f"Total votes: {tot_votes}")
+    file.write(f"Total votes: {tot_votes}\n")
     file.write("---------------------------\n")
     file.write(f"Khan: {Khan_pct}% ({Khan_votes})\n")
     file.write(f"Correy: {Correy_pct}% ({Correy_votes})\n")
