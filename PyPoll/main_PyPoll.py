@@ -1,6 +1,9 @@
 import csv, os
 
 path = os.path.join("Resources", "election_data.csv")
+OUT_PATH = os.path.join("Analysis", "analysis.txt")
+
+# TEXT_FILE = "main_PyPoll.txt"
 
 print("Election Results")
 print("---------------------------")
@@ -58,6 +61,24 @@ with open(path, "r") as file:
 print("---------------------------")   
 print(f"Winner: {winner}")          # change this to write name rather than vote count
 print("---------------------------")
+
+# EXPORT TO TEXT FILE
+with open(OUT_PATH, "w+") as file:
+    
+#     csv_writer = csv.writer(file)
+    
+    file.write("Election Results\n")
+    file.write("---------------------------\n")
+    file.write(f"Total votes: {tot_votes}")
+    file.write("---------------------------\n")
+    file.write(f"Khan: {Khan_pct}% ({Khan_votes})\n")
+    file.write(f"Correy: {Correy_pct}% ({Correy_votes})\n")
+    file.write(f"Li: {Li_pct}% ({Li_votes})\n")
+    file.write(f"O'Tooley: {OTooley_pct}% ({OTooley_votes})\n")
+    file.write("---------------------------\n")   
+    file.write(f"Winner: {winner}\n")          # change this to write name rather than vote count
+    file.write("---------------------------\n")
+
 
 # QUESTIONS: 
 #     how to format numbers to decimal places
