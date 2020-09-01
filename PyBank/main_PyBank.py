@@ -32,23 +32,15 @@ with open(path, "r") as file:
     
     reader = csv.DictReader(file)
     data = list(reader)
-#     print(data)
-#     my_dict = dict(data)
-#     profit_loss = my_dict["Profit/Losses"]
-#     pprint.pprint(profit_loss)
+
     profit_loss = []
     for row in data:
         row = dict(row)
-#         print(row)
         profit_loss.append(row["Profit/Losses"])
 #         while i < int(len(profit_loss)) - 1:
 #             change.append(int(profit_loss[i+1]) - int(profit_loss[i]))
             
-#     pprint.pprint(profit_loss)
-#     print(change[0:2])
-#     print(type(profit_loss[1]))
     profit = [int(e) for e in profit_loss]
-#     print(type(profit[1]))
 
     change = []
     i = 0
@@ -56,42 +48,47 @@ with open(path, "r") as file:
         c = int(profit[i+1]) - int(profit[i])
         change.append(c)
         i += 1
-#     print(change)
     avg_change = round((sum(change) / len(change)), 2)
-
+#     print(change)
+    
+    dict_change = list(dict.fromkeys(change, "Change"))
+#     print(dict_change)
+    
     print(f"Average Change: ${avg_change}")
 
-with open(path, "r") as file:
+with open(path, "r") as file:     # make a dictionary to reference date based on greatest change +/-
     
-    reader = csv.DictReader(file)
-    data = list(reader)
+    reader = list(csv.DictReader(file))
+#     data = list(reader)
 #     print(data)
-#     greatest_incr = max(change)
-    zip_change = list(zip(data, change))
-#     print(type(zip_change))
-#     [print(e) for e in zip_change]
-    print(zip_change[20])
-    #[dict(row) for row in zip_change]
-    #print(row)
-    date_greatest_incr = 0
-    greatest_incr = 0
-    for e in zip_change:
-        if zip_change[2] == greatest_incr:
-            date_greatest_incr = data["Date"]
-#     date_greatest_incr = 0
-#     for k, v in data.items():
-#         if v == greatest_incr:
-#             date_greatest_incr = data["Date"]
+#     for row in reader:
+#         row = dict(row)
+#         print(row)
+#     data = dict(reader)
+#     data = zip(reader, dict_change)
+#     for row in data:
+#         print(row)
+#     for row in data:
+#         print(row)
+    
+#     zip_change = list(zip(data, change))
+#     print(zip_change)
+#     for row in zip_change:
+#         print(row)
 
-#     change_dict = [dict(e) for e in change]
-#     print(change_dict)    
+    date_greatest_incr = 0
+    greatest_incr = max(change)
+    
+#     for e in zip_change:
+#         if zip_change[1] == greatest_incr:
+#             date_greatest_incr = data["Date"]  
 
     print(f"\nGreatest Increase in Profits: {date_greatest_incr} (${greatest_incr})")
     
 with open(path, "r") as file, open(OUT_PATH, "w+") as out_file:
-#     greatest_decr = min(change)
-    greatest_decr_date = 0
-    greatest_decr = 0
+
+    date_greatest_decr = 0
+    greatest_decr = min(change)
 #     for k, v in data.items():
 #         if v == greatest_decr:
 #             greatest_decr_date = data["Date"]
@@ -102,7 +99,8 @@ with open(path, "r") as file, open(OUT_PATH, "w+") as out_file:
     out_file.write(f"Total months: {tot_months}\nTotal: ${total}\n")
     out_file.write(f"Average Change: ${avg_change}")
     out_file.write(f"\nGreatest Increase in Profits: {date_greatest_incr} (${greatest_incr})\n")
-    out_file.write(f"Greatest Decrease in Profits: {greatest_decr_date} (${greatest_decr})\n")
-                     
+    out_file.write(f"Greatest Decrease in Profits: {date_greatest_decr} (${greatest_decr})\n")
+
 # QUESTIONS:
-#     how to reference "date" value based on max(change)?
+#     How to reference "date" value based on max(change)? add the "change" data to the Date, Profit/Losses dictionary with "Change" as the key
+#     Am i opening the file too many times? if i run a process and exhaust all the lines, must re-open the file...?
