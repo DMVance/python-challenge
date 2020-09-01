@@ -5,15 +5,11 @@ import os, csv, pprint
 
 path = os.path.join("Resources", "budget_data.csv")
 OUT_PATH = os.path.join("Analysis", "analysis.txt")
-
-with open(OUT_PATH, "w+") as out_file:
     
-    print("Financial Analysis")
-    out_file.write("Financial Analysis")
-    print("---------------------------")
-    out_file.write("---------------------------")
+print("Financial Analysis")
+print("---------------------------")
 
-with open(path, "r") as file, open(OUT_PATH, "w+") as out_file:
+with open(path, "r") as file:
 
     csv_reader = csv.reader(file)  # using csv.reader() gives me the data in list format already. No need to manually split/strip to clean the data.
     
@@ -31,9 +27,8 @@ with open(path, "r") as file, open(OUT_PATH, "w+") as out_file:
         tot_months += 1
         total += int(row[1])
     print(f"Total months: {tot_months}\nTotal: ${total}\n")
-    out_file.write(f"Total months: {tot_months}\nTotal: ${total}\n")
     
-with open(path, "r") as file, open(OUT_PATH, "w+") as out_file:
+with open(path, "r") as file:
     
     reader = csv.DictReader(file)
     data = list(reader)
@@ -65,9 +60,8 @@ with open(path, "r") as file, open(OUT_PATH, "w+") as out_file:
     avg_change = round((sum(change) / len(change)), 2)
 
     print(f"Average Change: ${avg_change}")
-    out_file.write(f"Average Change: ${avg_change}")
 
-with open(path, "r") as file, open(OUT_PATH, "w+") as out_file:
+with open(path, "r") as file:
     
     reader = csv.DictReader(file)
     data = list(reader)
@@ -93,7 +87,6 @@ with open(path, "r") as file, open(OUT_PATH, "w+") as out_file:
 #     print(change_dict)    
 
     print(f"\nGreatest Increase in Profits: {date_greatest_incr} (${greatest_incr})")
-    out_file.write(f"\nGreatest Increase in Profits: {date_greatest_incr} (${greatest_incr})")
     
 with open(path, "r") as file, open(OUT_PATH, "w+") as out_file:
 #     greatest_decr = min(change)
@@ -103,42 +96,13 @@ with open(path, "r") as file, open(OUT_PATH, "w+") as out_file:
 #         if v == greatest_decr:
 #             greatest_decr_date = data["Date"]
     print(f"Greatest Decrease in Profits: {greatest_decr_date} (${greatest_decr})")
-    out_file.write(f"Greatest Decrease in Profits: {greatest_decr_date} (${greatest_decr})")
+    
+    out_file.write("Financial Analysis\n")
+    out_file.write("---------------------------\n")
+    out_file.write(f"Total months: {tot_months}\nTotal: ${total}\n")
+    out_file.write(f"Average Change: ${avg_change}")
+    out_file.write(f"\nGreatest Increase in Profits: {date_greatest_incr} (${greatest_incr})\n")
+    out_file.write(f"Greatest Decrease in Profits: {greatest_decr_date} (${greatest_decr})\n")
                      
-# header = file.readline()  # Switch to csv.reader to clean the data and eliminate the strip/split work.
-#     data = file.readlines()
-#     cleandata = [row.strip().split(",") for row in data]
-#     change = [profit[date + 1] - profit[date] for date, profit in cleandata]
-#     print(change)
-#     data = dict(csv.DictReader(file))
-
-
-# with open(path, "r") as file:
-    
-#     reader = csv.DictReader(file)    # Try DictReader again...
-#     #print(reader)
-# #     for row in reader:
-# #         print(row['Date'], row['Profit/Losses'])
-# #         print(dict(row))
-    
-# #     pprint.pprint([dict(ordered_dict) for ordered_dict in reader])
-# #     avg_change = 0 #change / tot
-# #     tot = 0 
-# #     #i = 0
-#     changed = list(reader)
-#     change = int(changed[0]['Profit/Losses'])
-# #     change_list = []
-#     next(reader)
-#     for row in reader:    # Want to ignore the first value in Profit/Losses column. Use only for calculating change to next row.
-#         change = int(row['Profit/Losses']) - change
-#         change_list.append(change)
-#         #i += 1
-#         tot += 1
-#     pprint.pprint(change_list)
-# #     change = [profit[date + 1] - profit[date] for date, profit in file]
-# #     for line in data:
-# #         tot += 1
-# #         profit = int(data[line]["Profit/Losses"]
-# #         print(profit)
-        
-# #     print(f"Average Change: ${avg_change}")
+# QUESTIONS:
+#     how to reference "date" value based on max(change)?
