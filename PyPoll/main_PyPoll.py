@@ -19,10 +19,10 @@ with open(path, "r") as file:
         if e[2] not in candidates:
             candidates.append(e[2])
         tot_votes += 1
-    print(f"Total votes: {tot_votes}\n")
+    print(f"Total votes: {tot_votes}")
 #     print(candidates)
 
-print("---------------------------\n")
+print("---------------------------")
 
 with open(path, "r") as file:
     
@@ -43,10 +43,10 @@ with open(path, "r") as file:
         else:
             OTooley_votes += 1
     
-    Khan_pct = (Khan_votes / tot_votes) * 100
-    Correy_pct = (Correy_votes / tot_votes) * 100
-    Li_pct = (Li_votes / tot_votes) * 100
-    OTooley_pct = (OTooley_votes / tot_votes) * 100
+    Khan_pct = round(((Khan_votes / tot_votes) * 100), 2)
+    Correy_pct = round(((Correy_votes / tot_votes) * 100), 2)
+    Li_pct = round(((Li_votes / tot_votes) * 100), 2)
+    OTooley_pct = round(((OTooley_votes / tot_votes)) * 100, 2)
     
     print(f"Khan: {Khan_pct}% ({Khan_votes})")
     print(f"Correy: {Correy_pct}% ({Correy_votes})")
@@ -57,6 +57,6 @@ print("---------------------------")
 print("Winner: { }")
 print("---------------------------")
 
-QUESTIONS: 
-    how to format numbers to decimal places
-    best way to get max value and reference another value based on that
+# QUESTIONS: 
+#     how to format numbers to decimal places
+#     best way to get max value and reference another value based on that
