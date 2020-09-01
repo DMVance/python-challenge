@@ -1,10 +1,10 @@
-import os, csv, pprint
+#!/usr/bin/env python3
+# This program creates a Python script for analyzing the financial records of a company.
+
+import os, csv
 
 path = os.path.join("Resources", "budget_data.csv")
 OUT_PATH = os.path.join("Analysis", "PyBank_analysis.txt")
-    
-print("Financial Analysis")
-print("---------------------------")
 
 with open(path, "r") as file, open(OUT_PATH, "w+") as out_file:
 
@@ -37,7 +37,9 @@ with open(path, "r") as file, open(OUT_PATH, "w+") as out_file:
             
     avg_change = round((sum(change) / len(change)), 2)
     
-    output_string = f"Total months: {tot_months}\n"\
+    output_string = f"Financial Analysis\n"\
+    f"---------------------------\n"\
+    f"Total months: {tot_months}\n"\
     f"Total: ${total}\n"\
     f"Average Change: ${avg_change}\n"\
     f"Greatest Increase in Profits: {great_incr_month} (${great_incr})\n"\
