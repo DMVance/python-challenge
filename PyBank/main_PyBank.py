@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# This program creates a Python script for analyzing the financial records of your company.
+# This program creates a Python script for analyzing the financial records of a company.
 
 import os, csv
 
