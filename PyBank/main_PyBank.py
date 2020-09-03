@@ -7,6 +7,8 @@ OUT_PATH = os.path.join("Analysis", "PyBank_analysis.txt")
 
 with open(path, "r") as file, open(OUT_PATH, "w+") as out_file:
 
+    reader = csv.DictReader(file)
+
     change = []
     tot_months = 0    
     total = 0 
@@ -15,8 +17,6 @@ with open(path, "r") as file, open(OUT_PATH, "w+") as out_file:
     great_decr_month = 0
     great_incr = float('-inf')
     great_decr = float('inf')
-    
-    reader = csv.DictReader(file)
     
     for row in reader:
         tot_months += 1
