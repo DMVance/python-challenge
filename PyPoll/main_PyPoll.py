@@ -1,8 +1,6 @@
-#!/usr/bin/env python3
 # This program modernizes the vote counting process of a small, rural town.
 
 import csv, os
-from collections import Counter
 
 path = os.path.join("Resources", "election_data.csv")
 OUT_PATH = os.path.join("Analysis", "PyPoll_analysis.txt")
@@ -12,30 +10,31 @@ with open(path, "r") as file, open(OUT_PATH, "w+") as out_file:
     reader = csv.reader(file)
     header = next(reader)            
 
-    candidate_votes = []
+    candidates = []
     
     for row in reader:
-        candidate_votes.append(row[2])
+        candidates.append(row[2])
     
-    vote_count = dict(Counter(candidate_votes))
+    vote_tally = dict((name, candidates.count(name)) for name in set(candidates))
+    sorted_tally = dict(sorted(vote_tally.items(), key=lambda x: x[1], reverse=True))    
     
-    winner = max(vote_count, key=vote_count.get)
-   
-    csv_writer = csv.writer(out_file)
-
+    v = list(sorted_tally.values()) 
+    k = list(sorted_tally.keys()) 
+    winner = k[v.index(max(v))]
+    
     print("Election Results")
     print("------------------------------")
-    print(f"Total Votes: {len(candidate_votes)}")
+    print(f"Total Votes: {len(candidates)}")
     print("------------------------------")
     
     out_file.write("Election Results\n")
     out_file.write("------------------------------\n")
-    out_file.write(f"Total Votes: {len(candidate_votes)}\n")
+    out_file.write(f"Total Votes: {len(candidates)}\n")
     out_file.write("------------------------------\n")
     
-    for key, value in vote_count.items():
-        print(f"{key}: {round(((value / len(candidate_votes))*100), 2)}% ({value})")
-        out_file.write(f"{key}: {round(((value / len(candidate_votes))*100), 2)}% ({value})\n")
+    for key, value in sorted_tally.items():
+        print(f"{key}: {round(((value / len(candidates))*100), 2)}% ({value})")
+        out_file.write(f"{key}: {round(((value / len(candidates))*100), 2)}% ({value})\n")
     
     print("------------------------------")
     out_file.write("------------------------------\n")
