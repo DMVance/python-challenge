@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 # This program creates a Python script for analyzing the financial records of a company.
 
 import os, csv
@@ -12,10 +11,10 @@ with open(path, "r") as file, open(OUT_PATH, "w+") as out_file:
     tot_months = 0    
     total = 0 
     previous_month = 0
-    great_incr = float('-inf')
     great_incr_month = 0
-    great_decr = float('inf')
     great_decr_month = 0
+    great_incr = float('-inf')
+    great_decr = float('inf')
     
     reader = csv.DictReader(file)
     
